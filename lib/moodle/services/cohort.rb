@@ -11,10 +11,10 @@ module Moodle
           counter = counter + 1
         end
 
-        response = request(params)
+        response = request(params: params)
 
         if response.any?
-          cohorts = response.map { |cohort| Hashie::Mash.new(cohort) }
+          response.map { |cohort| Hashie::Mash.new(cohort) }
         end
       end
     end

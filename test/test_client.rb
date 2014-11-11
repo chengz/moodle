@@ -1,7 +1,7 @@
 require 'test_helper'
 require 'moodle/client'
 
-class ClientTest < Test::Unit::TestCase
+class ClientTest < Minitest::Test
   # Test initialization with hash
   def test_initialize_with_hash
     client = Moodle::Client.new({
@@ -25,10 +25,39 @@ class ClientTest < Test::Unit::TestCase
 
   # Test obtaining a token
   def test_obtain_token
-    client = Moodle::Protocol::Rest.new
-    client.stubs(:request).returns('{"token" : "12345"}')
+    RestClient.stubs(:get).returns('{"token" : "12345"}')
     moodle_client = Moodle::Client.new({:token => 'dummy', :domain => 'test'})
-    moodle_client.stubs(:client).returns(client)
     assert_equal '12345', moodle_client.obtain_token()
+  end
+
+  describe "calling different methods from RestClient" do
+    before do
+      @client = Moodle::Client.new({
+        :username => 'test_username',
+        :password => 'test_password',
+        :domain   => 'test_domain',
+        :protocol => 'test_protocol',
+        :service => 'test_service',
+        :format => 'test_format',
+        :token => 'test_token'
+      })
+    end
+    it "calls get" do
+      RestClient.stubs(:get).returns('{"method" : "get"}')
+      expected = { 'method' => 'get' }
+      @client.request(method: :get).must_equal expected
+    end
+
+    it "calls post" do
+      RestClient.stubs(:post).returns('{"method" : "post"}')
+      expected = { 'method' => 'post' }
+      @client.request(method: :post).must_equal expected
+    end
+
+    it "calls delete" do
+      RestClient.stubs(:delete).returns('{"method" : "delete"}')
+      expected = { 'method' => 'delete' }
+      @client.request(method: :delete).must_equal expected
+    end
   end
 end

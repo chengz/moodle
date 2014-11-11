@@ -12,5 +12,8 @@ Gem::Specification.new do |spec|
   spec.license     = 'MIT'
   
   spec.add_dependency('rest-client', '~> 1.7.2')
-  
+  spec.add_dependency('hashie', '> 3.3.0')
+
+  spec.add_development_dependency('minitest')
+  spec.add_development_dependency('minitest-matchers')
 end

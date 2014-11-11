@@ -1,7 +1,7 @@
 require 'test_helper'
 require 'moodle'
 
-class MoodleTest < Test::Unit::TestCase
+class MoodleTest < Minitest::Test
   # Test creating new instance
   def test_new_with_token
     client = Moodle.new(:token => 'test')

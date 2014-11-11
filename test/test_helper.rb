@@ -1,9 +1,3 @@
-require 'simplecov'
-
-SimpleCov.start do
-    # Exclude test files from coverage
-    add_filter "test_"
-end
-
-require 'test/unit'
+require "minitest/matchers"
+require 'minitest/autorun'
 require 'mocha/setup'
