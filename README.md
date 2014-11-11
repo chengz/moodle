@@ -1,6 +1,6 @@
 # Moodle
-[![Build Status](https://travis-ci.org/robertboloc/moodle.png)](https://travis-ci.org/robertboloc/moodle)
-[![Code Climate](https://codeclimate.com/github/robertboloc/moodle.png)](https://codeclimate.com/github/robertboloc/moodle)
+[![Build Status](https://travis-ci.org/chengz/moodle.svg)](https://travis-ci.org/chengz/moodle)
+[![Code Climate](https://codeclimate.com/github/chengz/moodle/badges/gpa.svg)](https://codeclimate.com/github/chengz/moodle)
 [![Gem Version](https://badge.fury.io/rb/moodle.png)](http://badge.fury.io/rb/moodle)
 
 Ruby gem to interact with Moodle via web services.
