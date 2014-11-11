@@ -64,7 +64,7 @@ module Moodle
 
     def parse_response(response)
       # moodle will return weird 'null' string
-      JSON.parse(response) if !response.blank? && response != 'null'
+      JSON.parse(response) if response && response != 'null'
     end
   end
 end

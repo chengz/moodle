@@ -1,6 +1,6 @@
 Gem::Specification.new do |spec|
   spec.name        = 'moodle'
-  spec.version     = '0.1.1'
+  spec.version     = '0.1.2'
   spec.date        = '2014-11-11'
   spec.summary     = "Moodle web services from ruby"
   spec.description = "Interact with Moodle from ruby"
