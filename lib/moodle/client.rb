@@ -51,12 +51,13 @@ module Moodle
         :moodlewsrestformat => @format,
         :wsfunction => caller[0][/`.*'/][1..-2]
       )
+      service_url = @domain + '/webservice/' + @protocol + '/server.php'
       if method == :post
-        response = RestClient.post @domain + '/webservice/' + @protocol + '/server.php', params
+        response = RestClient.post service_url, params
       elsif method == :delete
-        response = RestClient.delete @domain + '/webservice/' + @protocol + '/server.php', params
+        response = RestClient.delete service_url, params
       else
-        response = RestClient.get @domain + '/webservice/' + @protocol + '/server.php', params: params
+        response = RestClient.get service_url, params: params
       end
       parse_response(response)
     end
