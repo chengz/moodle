@@ -51,6 +51,7 @@ module Moodle
         :moodlewsrestformat => @format,
         :wsfunction => caller[0][/`.*'/][1..-2]
       )
+      puts params.inspect
       if method == :post
         response = RestClient.post @domain + '/webservice/' + @protocol + '/server.php', params
       elsif method == :delete
@@ -58,7 +59,12 @@ module Moodle
       else
         response = RestClient.get @domain + '/webservice/' + @protocol + '/server.php', params: params
       end
-      JSON.parse(response)
+      parse_response(response)
+    end
+
+    def parse_response(response)
+      # moodle will return weird 'null' string
+      JSON.parse(response) if !response.blank? && response != 'null'
     end
   end
 end

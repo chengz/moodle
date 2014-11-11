@@ -41,14 +41,42 @@ module Moodle
       end
 
       def core_user_create_users(users = [])
-        counter = 0
-        params = {}
-        users.each do |user|
-          params['users[' + counter.to_s + ']'] = user
-        end
-        response = request(method: :post, params: params)
+        response = request(method: :post, params: process_users(users))
         response.map { |user| Hashie::Mash.new(user) }
       end
+
+      def core_user_update_user(user)
+        core_user_update_users([user])
+      end
+
+      def core_user_update_users(users = [])
+        response = request(method: :post, params: process_users(users))
+        response ||= users
+      end
+
+      protected
+        def process_users(users)
+          counter = 0
+          params = {}
+          users.each do |user|
+            user.each do |key, value|
+              hash_key = 'users[' + counter.to_s + '][' + key.to_s + ']'
+              if value.is_a?(Hash)
+                index = 0
+                value.each do |subkey, subvalue|
+                  sub_hash_key = hash_key + '[' + index.to_s + ']'
+                  params[sub_hash_key + '[type]'] = subkey.to_s
+                  params[sub_hash_key + '[value]'] = subvalue
+                  index = index + 1
+                end
+              else
+                params[hash_key] = value
+              end
+            end
+            counter = counter + 1
+          end
+          params
+        end
     end
   end
 end
