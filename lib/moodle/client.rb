@@ -51,7 +51,6 @@ module Moodle
         :moodlewsrestformat => @format,
         :wsfunction => caller[0][/`.*'/][1..-2]
       )
-      puts params.inspect
       if method == :post
         response = RestClient.post @domain + '/webservice/' + @protocol + '/server.php', params
       elsif method == :delete
