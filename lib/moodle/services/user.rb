@@ -11,7 +11,7 @@ module Moodle
         counter = 0
         values.each do |id|
           params['values[' + counter.to_s + ']'] = id
-          counter = counter + 1
+          counter += 1
         end
 
         response = request(params: params)
@@ -52,6 +52,7 @@ module Moodle
       def core_user_update_users(users = [])
         response = request(method: :post, params: process_users(users))
         response ||= users
+        response.map { |user| Hashie::Mash.new(user) }
       end
 
       protected
@@ -67,13 +68,13 @@ module Moodle
                   sub_hash_key = hash_key + '[' + index.to_s + ']'
                   params[sub_hash_key + '[type]'] = subkey.to_s
                   params[sub_hash_key + '[value]'] = subvalue
-                  index = index + 1
+                  index += 1
                 end
               else
                 params[hash_key] = value
               end
             end
-            counter = counter + 1
+            counter += 1
           end
           params
         end
