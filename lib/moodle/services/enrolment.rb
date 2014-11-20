@@ -19,6 +19,7 @@ module Moodle
 
         response = request(method: :post, params: params)
         response ||= enrolments
+        Hashie::Mash.new(response)
       end
     end
   end

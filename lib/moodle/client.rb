@@ -27,9 +27,7 @@ module Moodle
       @token    = options[:token]    || Moodle.config[:token]
 
       # If no token is provided generate one
-      if @token.nil?
-        @token = self.obtain_token
-      end
+      @token = self.obtain_token if @token.nil?
     end
 
     # Obtains a token from the username and password
@@ -40,8 +38,7 @@ module Moodle
         :service  => @service
       })
 
-      parsed = JSON.parse(response)
-      parsed['token']
+      JSON.parse(response)['token']
     end
 
     # Make a request using the desired protocol and format
@@ -52,13 +49,14 @@ module Moodle
         :wsfunction => caller[0][/`.*'/][1..-2]
       )
       service_url = @domain + '/webservice/' + @protocol + '/server.php'
-      if method == :post
-        response = RestClient.post service_url, params
-      elsif method == :delete
-        response = RestClient.delete service_url, params
-      else
-        response = RestClient.get service_url, params: params
-      end
+
+      response =  if method == :post
+                    RestClient.post service_url, params
+                  elsif method == :delete
+                    RestClient.delete service_url, params
+                  else
+                    RestClient.get service_url, params: params
+                  end
       parse_response(response)
     end
 
