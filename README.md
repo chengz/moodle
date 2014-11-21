@@ -140,6 +140,22 @@ courses.each do |course|
 end
 ```
 
+### Enrolment
+
+#### enrol_manual_enrol_user
+Enroll user to a specific course
+```ruby
+enrolments = client.enrol_manual_enrol_user(:user_id => 2, :role_id =>
+2, :course_id => 3)
+
+enrolments.each do |enrolment|
+  enrolment.id              # => 3
+  enrolment.user_id         # => 2
+  enrolment.role_id         # => 2
+  enrolment.course_id       # => 3
+end
+```
+
 ### Users
 
 #### core_user_get_users_by_field
@@ -173,6 +189,39 @@ users.each do |user|
   user.lastaccess           # => 1392471263
   user.profileimageurlsmall # => http://mydomain/moodle/pluginfile.php/5/user/icon/f2
   user.profileimageurl      # => http://mydomain/moodle/pluginfile.php/5/user/icon/f1
+end
+```
+
+#### core_user_create_user
+Create user
+```ruby
+users = client.core_user_create_user({:email => 'suchemail@test.com',
+:firstname => 'Test', :lastname => 'User'})
+
+users.each do |user|
+  user.id                   # => 2
+  user.firstname            # => Test
+  user.lastname             # => User
+  user.fullname             # => Test User
+  user.email                # => suchemail@test.com
+  user.firstaccess          # => 139240932
+  user.lastaccess           # => 1392471263
+end
+```
+
+#### core_user_update_user
+Update user
+```ruby
+users = client.core_user_update_user({:id => 2, :firstname => 'OtherName'})
+
+users.each do |user|
+  user.id                   # => 2
+  user.firstname            # => Test
+  user.lastname             # => User
+  user.fullname             # => Test User
+  user.email                # => suchemail@test.com
+  user.firstaccess          # => 139240932
+  user.lastaccess           # => 1392471263
 end
 ```
 

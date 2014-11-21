@@ -8,7 +8,7 @@ module Moodle
         counter = 0
         ids.each do |id|
           params['cohortids[' + counter.to_s + ']'] = id
-          counter = counter + 1
+          counter += 1
         end
 
         response = request(params: params)
