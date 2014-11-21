@@ -142,7 +142,7 @@ end
 
 ### Enrolment
 
-### enrol_manual_enrol_user
+#### enrol_manual_enrol_user
 Enroll user to a specific course
 ```ruby
 enrolments = client.enrol_manual_enrol_user(:user_id => 2, :role_id =>
@@ -192,7 +192,7 @@ users.each do |user|
 end
 ```
 
-### core_user_create_user
+#### core_user_create_user
 Create user
 ```ruby
 users = client.core_user_create_user({:email => 'suchemail@test.com',
@@ -209,7 +209,7 @@ users.each do |user|
 end
 ```
 
-### core_user_update_user
+#### core_user_update_user
 Update user
 ```ruby
 users = client.core_user_update_user({:id => 2, :firstname => 'OtherName'})
