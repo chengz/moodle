@@ -26,7 +26,7 @@ module Moodle
         criteria.each do |key,value|
           params['criteria[' + counter.to_s + '][key]'] = key.to_s
           params['criteria[' + counter.to_s + '][value]'] = value
-          counter = counter + 1
+          counter += 1
         end
 
         response = request(params: params)
