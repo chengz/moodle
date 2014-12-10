@@ -1,14 +1,16 @@
+$:.push File.expand_path("../lib", __FILE__)
+# Maintain your gem's version:
+require "moodle/version"
 Gem::Specification.new do |spec|
   spec.name        = 'moodle'
-  spec.version     = '0.1.2'
+  spec.version     = Moodle::VERSION
   spec.date        = '2014-11-11'
   spec.summary     = "Moodle web services from ruby"
   spec.description = "Interact with Moodle from ruby"
   spec.authors     = ["Robert Boloc"]
   spec.email       = 'robertboloc@gmail.com'
   spec.files       = `git ls-files`.split("\n")
-  spec.homepage    =
-    'http://robertboloc.github.com/moodle'
+  spec.homepage    = 'http://robertboloc.github.com/moodle'
   spec.license     = 'MIT'
 
   spec.required_ruby_version = '~> 2.0'

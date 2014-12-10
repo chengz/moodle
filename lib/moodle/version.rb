@@ -1,0 +1,3 @@
+module Moodle
+  VERSION = "0.1.3"
+end
